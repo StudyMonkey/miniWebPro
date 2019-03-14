@@ -1,7 +1,6 @@
 // 工具函数库
 
 import config from '../config'
-import { hostname } from 'os';
 
 export function request(url, data) {
   return new Promise( (resolve, reject) => {
@@ -30,5 +29,12 @@ export function get(name, data) {
         console.log(err)
       }
     })    
+  })
+}
+
+export function showSuccess(text) {
+  wx.showToast({
+    title: text,
+    icon: 'success'
   })
 }

@@ -6,10 +6,12 @@ import config from './config'
 export default {
   async created () {
     console.log('first app created!!')
-    wx.cloud.init();
+    wx.cloud.init()
 
     // 设置登录地址
-    qcloud.setLoginUrl('https://199447.qcloud.la/login');
+/*     qcloud.setLoginUrl('https://7465-testwebapp-ec2ddf-1258793997.tcb.qcloud.la');
+    const session = qcloud.Session.get();
+    console.log(session);
     qcloud.login({
         success: function (userInfo) {
             console.log('登录成功', userInfo);
@@ -17,7 +19,16 @@ export default {
         fail: function (err) {
             console.log('登录失败', err);
         }
-    }); 
+    });  */
+
+    wx.authorize({
+        // 通过scope指明申请获取哪种类型的权限
+        scope: 'scope.record',
+        success() {
+          // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+          wx.startRecord()
+        }
+    })
     
     // qcloud.request({
     //     url: 'http://199447.qcloud.la/user',
@@ -44,14 +55,18 @@ export default {
 </script>
 
 <style>
-.container {
-  background-color: #cccccc
+.btn{
+  color: #ffffff;
+  background-color: #EA5A49;
+  margin: 10px 0;
+  padding: 0 15px;
+  border-radius: 2px;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  width: 100%
 }
-/* this rule will be remove */
-* {
-  transition: width 2s;
-  -moz-transition: width 2s;
-  -webkit-transition: width 2s;
-  -o-transition: width 2s;
+.btn:active{
+  background-color: #FA5A49
 }
 </style>
