@@ -1,4 +1,5 @@
 # miniwebpro
+获取用户个人信息，修改了node_modules/mpvue/index.js里面的部分代码，未上传，请注意
 
 > A Mpvue project
 
