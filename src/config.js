@@ -10,7 +10,7 @@ const bookApi = "https://api.douban.com/v2/book/isbn/"
 //   API_BOOK_DETAIL: API_BASE + "/:id"
 // }
 
-const host = 'http://localhost:9090'
+const host = 'http://localhost:3999'
 
 const config = {
   host,

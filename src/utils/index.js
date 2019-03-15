@@ -9,7 +9,7 @@ function request(url, method, data, header = {}) {
   })
   return new Promise((resolve, reject) => {
       wx.request({
-          url: config.bookApi+url,
+          url: config.host+url,
           method: method,
           data: data,
           headers: {

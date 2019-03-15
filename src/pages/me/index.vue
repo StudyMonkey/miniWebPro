@@ -53,7 +53,7 @@ export default {
       }
     },
     addBook(isbn){
-      this.$http.get({url: isbn}).then( res => {
+      this.$http.get({url: '/test?isbn='+isbn}).then( res => {
         console.log(res)
       })
     },

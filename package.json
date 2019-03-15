@@ -24,6 +24,11 @@
     "lint": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "mpvue": "^2.0.0",
