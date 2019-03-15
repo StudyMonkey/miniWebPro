@@ -7,37 +7,37 @@
 
 <script>
 export default {
-    methods: {
-        isLeapYear(){
-            const year = new Date().getFullYear();
-            if ( year % 400 === 0 ) {
-                return true
-            } else if ( year % 4 === 0 && year % 100 !== 0 ) {
-                return true
-            } else {
-                return false
-            }
-        },
-        getDayOfYear(){
-            return this.isLeapYear() ? 366 : 365
-        }
+  methods: {
+    isLeapYear () {
+      const year = new Date().getFullYear()
+      if (year % 400 === 0) {
+        return true
+      } else if (year % 4 === 0 && year % 100 !== 0) {
+        return true
+      } else {
+        return false
+      }
     },
-    computed: {
-        year(){
-            return new Date().getFullYear()
-        },
-        days(){
-            let start = new Date();
-            start.setMonth(0);
-            start.setDate(1);
-            // start 是今年第一天
-            let offset = new Date().getTime() - start.getTime();
-            return parseInt(offset/1000/60/60/24)+1
-        },
-        percent(){
-            return (this.days*100 / this.getDayOfYear()).toFixed(1)
-        }
+    getDayOfYear () {
+      return this.isLeapYear() ? 366 : 365
+    }
+  },
+  computed: {
+    year () {
+      return new Date().getFullYear()
     },
+    days () {
+      let start = new Date()
+      start.setMonth(0)
+      start.setDate(1)
+      // start 是今年第一天
+      let offset = new Date().getTime() - start.getTime()
+      return parseInt(offset / 1000 / 60 / 60 / 24) + 1
+    },
+    percent () {
+      return (this.days * 100 / this.getDayOfYear()).toFixed(1)
+    }
+  }
 }
 </script>
 
