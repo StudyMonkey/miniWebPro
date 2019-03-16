@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { showSuccess, cloudLogin, colAddData } from '@/utils'
+import { showModel, cloudLogin, colSearchData, colAddData } from '@/utils'
 import YearProgress from '@/components/YearProgress'
 
 export default {
@@ -41,27 +41,50 @@ export default {
       console.log(e.mp)
       const { mp: { detail: { userInfo } } } = e
       if (!wx.getStorageSync('userInfo')) {
-        showSuccess('登录成功')
-        wx.setStorageSync('userInfo', userInfo)
-        this.userInfo = userInfo
+        showModel('登录成功', '恭喜')
         const res = await cloudLogin('login')
         const user = {...userInfo, ...res.result}
         user._id = user.openid
         delete user.event
-        const addRes = await colAddData('users', user)
-        console.log(addRes)
+        this.userInfo = userInfo
+        this.userInfo.openid = user.openid
+        wx.setStorageSync('userInfo', userInfo)
+        const addUser = await colAddData('users', user)
+        console.log(addUser)
       }
     },
-    addBook(isbn){
-      this.$http.get({url: '/test?isbn='+isbn}).then( res => {
+    addBook (isbn) {
+      this.$http.get({url: '/test?isbn=' + isbn}).then(async res => {
         console.log(res)
+        const { title, rating: { average }, image, alt, price, publisher, summary } = res
+        const tags = res.tags.map(v => {
+          return `${v.title} ${v.count}`
+        }).join(',')
+        const author = res.author.join(',')
+        const books = {
+          title,
+          average,
+          image,
+          alt,
+          price,
+          publisher,
+          summary,
+          tags,
+          author,
+          isbn,
+          openid: wx.getStorageSync('userInfo').openid
+        }
+        const addBook = await colSearchData('books', books, isbn)
+        if (addBook) {
+          showModel('添加成功', '图书已录入')
+        }
       })
     },
     scanBook () { // 扫码事件
       wx.scanCode({
         success: res => {
-          if ( res.result ) {
-            console.log(res.result);
+          if (res.result) {
+            console.log(res.result)
             this.addBook(res.result)
           }
         }

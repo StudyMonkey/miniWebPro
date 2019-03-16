@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "书籍列表",
+  "usingComponents": {
+    "i-rate": "../../static/dist/rate/index"
+  }
+}
