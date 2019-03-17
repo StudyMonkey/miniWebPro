@@ -1,23 +1,27 @@
 <template>
   <div>  
+    <TopSwiper :tops="tops"></TopSwiper>
     <Card v-for="(book,index) in books" :key="book.openid" :book="book"/>
     <p class="text-footer" v-if="!more">我是有底线的</p>
   </div>
 </template>
 
 <script>
-import { colSearchAll } from '@/utils'
+import { colSearchAll, searchDataOrder } from '@/utils'
 import Card from '@/components/card'
+import TopSwiper from '@/components/topSwiper'
 export default {
   data () {
     return {
       books: [],
       page: 0,
-      more: true
+      more: true,
+      tops: []
     }
   },
   components: {
-    Card
+    Card,
+    TopSwiper
   },
   async mounted () {
     /*     wx.login({
@@ -31,10 +35,12 @@ export default {
   },
   created () {
     this.getList(true)
+    this.getTops();
   },
   onPullDownRefresh () {
     console.log('下拉')
-    this.getList(true)
+    this.getList(true);
+    this.getTops();
   },
   onReachBottom () {
     console.log('到底了')
@@ -44,6 +50,21 @@ export default {
     this.getList(false)
   },
   methods: {
+    async getTops(){
+/*       const db = wx.cloud.database();
+      const { result: { top: { data }  } } = await wx.cloud.callFunction({
+                    // 云函数名称
+                    name: 'order',
+                    // 传给云函数的参数
+                    data: {
+                      count: 'count'
+                    },
+                  })
+      console.log('getTops', data); */
+      const res = await searchDataOrder('books', 'count', 'desc');
+      console.log('getTops', res)
+      this.tops = res.data;
+    },
     async getList (init) {
       wx.showNavigationBarLoading()
       if (init) {

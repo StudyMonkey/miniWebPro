@@ -1,7 +1,8 @@
 <template>
-  <div>    
+  <div>
+    <a :href="detailUrl" >  
     <div class="book-card">
-      <div class="thumb">
+      <div class="thumb" @click.stop="handlePreview">
         <img 
           :src="book.image" 
           class="img"  
@@ -22,8 +23,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="right">
-            浏览量
+          <div class="right text-primary">
+            浏览量:{{book.count}}
           </div>
           <div class="left">
             {{book.author}}
@@ -36,6 +37,7 @@
         </div>                  
       </div>
     </div>
+    </a>  
   </div>
 </template>
 
@@ -45,8 +47,19 @@ export default {
   computed: {
     score () {
       return Math.round(this.book.average / 2)
+    },
+    detailUrl(){
+      return '/pages/detail/main?id='+this.book._id
     }
-  }
+  },
+  methods: {
+    handlePreview(){
+      wx.previewImage({
+        current: this.book.image,
+        urls: [this.book.image]
+      })
+    }
+  },
 }
 </script>
 

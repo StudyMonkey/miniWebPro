@@ -60,7 +60,59 @@ export function showModel (title, content) {
   })
 }
 /*
+  某数据库查询全部数据并排序操作方法
+  col 数据库
+  param 查询条件
+  order 排序规则
+*/
+export function searchDataOrder (col, param, order) {
+  const db = wx.cloud.database();
+  return new Promise( (resolve, reject) => {
+    db.collection('books').orderBy(param, order).limit(9).get({}).then( res => {
+      resolve(res)
+    })
+  })
+}
+/*
+  详情页查询具体某条数据方法
+  id _id查询条件
+*/
+export function searchDetail (id) {
+  const db = wx.cloud.database();
+  return new Promise( (resolve, reject) => {
+    db.collection('books').where({
+      _id: id
+    }).get({}).then( res => {
+      resolve(res)
+    })
+  })
+}
+/*
+  数据库 修改某数据库的单条数据方法
+  col 数据库
+  id 对应_id字段
+  some 对应修改字段 type: Object
+*/
+export function modifyData (col, id, some) {
+  const db = wx.cloud.database();
+  return new Promise( (resolve, reject) => {
+    db.collection(col).doc(id).update({
+      data: {
+        ...some
+      },
+      success (res) {
+        resolve(res)
+      },
+      fail (err) {
+        reject(err)
+      }
+    })
+  })
+}
+/*
   数据库 查询所有数据方法
+  col 数据库
+  page 分页 每页7条
 */
 export function colSearchAll (col, page) {
   const db = wx.cloud.database()
@@ -73,6 +125,9 @@ export function colSearchAll (col, page) {
 }
 /*
   数据库 查询书籍是否重复数据方法
+  col 数据库
+  data 添加到数据库的字段及值  type: Object
+  condition isbn码
 */
 export function colSearchData (col, data, condition) {
   const db = wx.cloud.database() // 数据库初始化
@@ -91,6 +146,8 @@ export function colSearchData (col, data, condition) {
 }
 /*
   数据库添加数据方法
+  col 数据库
+  data 添加的字段及值 type: Object
 */
 export function colAddData (col, data) {
   const db = wx.cloud.database() // 数据库初始化

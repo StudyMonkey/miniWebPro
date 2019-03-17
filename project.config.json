@@ -9,6 +9,7 @@
 		"autoAudits": false
 	},
 	"miniprogramRoot": "dist/wx/",
+	"cloudfunctionRoot": "./cloud/",
 	"compileType": "miniprogram",
 	"appid": "wxd8329009c59b5e83",
 	"projectname": "miniwebpro",
