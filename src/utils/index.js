@@ -62,10 +62,10 @@ export function showModel (title, content) {
 /*
   数据库 查询所有数据方法
 */
-export function colSearchAll (col) {
+export function colSearchAll (col, page) {
   const db = wx.cloud.database()
   return new Promise((resolve, reject) => {
-    db.collection(col).get({}).limit(4).then(res => {
+    db.collection(col).limit(7).skip(page * 7).get({}).then(res => {
       console.log(res)
       resolve(res.data)
     })
