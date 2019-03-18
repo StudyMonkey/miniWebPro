@@ -38,12 +38,10 @@ export default {
     this.getTops();
   },
   onPullDownRefresh () {
-    console.log('下拉')
     this.getList(true);
     this.getTops();
   },
   onReachBottom () {
-    console.log('到底了')
     if ( !this.more ) {
       return false;
     }
@@ -51,19 +49,22 @@ export default {
   },
   methods: {
     async getTops(){
-/*       const db = wx.cloud.database();
+      const db = wx.cloud.database();
       const { result: { top: { data }  } } = await wx.cloud.callFunction({
                     // 云函数名称
                     name: 'order',
                     // 传给云函数的参数
                     data: {
-                      count: 'count'
+                      col: 'books',
+                      param: 'count',
+                      limit: 9
                     },
                   })
-      console.log('getTops', data); */
-      const res = await searchDataOrder('books', 'count', 'desc');
-      console.log('getTops', res)
-      this.tops = res.data;
+      console.log('getTops', data); 
+      this.tops = data;
+      // const res = await searchDataOrder('books', 'count', 'desc');
+      // console.log('getTops', res)
+      // this.tops = res.data;
     },
     async getList (init) {
       wx.showNavigationBarLoading()
@@ -80,7 +81,6 @@ export default {
           this.more = false
         }
         this.books = this.books.concat(res)
-        console.log(this.books)
       }
 
       wx.hideNavigationBarLoading()

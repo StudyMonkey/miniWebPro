@@ -7,9 +7,12 @@ const db = cloud.database();
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { col, param, limit, order='desc' } = event
-  const top = await db.collection(col).orderBy(param, order).limit(limit).get()
+  const { openid } = event;
+  const userInfo = await db.collection('users').where({
+    _openid: openid
+  }).get();
+
   return {
-    top
+    userInfo
   }
 }

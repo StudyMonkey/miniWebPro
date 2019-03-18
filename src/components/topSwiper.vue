@@ -2,7 +2,7 @@
     <div class="swiper">
         <swiper
           :indicator-dots="true"
-          indicator-color="EA5A49"
+          indicator-color="#EA5A49"
           :autoplay="true"
           :interval="6000"
           :duration="1000"
