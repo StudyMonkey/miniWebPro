@@ -1,9 +1,8 @@
 <script>
-
 export default {
-  async created () {
-    console.log('first app created!!')
-    wx.cloud.init()
+  async created() {
+    console.log("first app created!!");
+    wx.cloud.init();
 
     // wx.authorize({
     //     // 通过scope指明申请获取哪种类型的权限
@@ -14,30 +13,46 @@ export default {
     //     }
     // })
 
-    const db = wx.cloud.database()
-    db.collection('counters').get({ success (res) {
-      console.log('数据查询', res)
-    } })
+    const db = wx.cloud.database();
+    db.collection("counters").get({
+      success(res) {
+        console.log("数据查询", res);
+      }
+    });
   }
-}
+};
 </script>
 
 <style>
-.text-primary{
-  color: #EA5A49
+.text-footer{
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
-.btn{
+.text-primary {
+  color: #ea5a49;
+}
+.right {
+  float: right;
+}
+.page-title {
+  padding-left: 20px;
+  line-height: 40px;
+  font-size: 14px;
+  background-color: #eeeeee;
+}
+.btn {
   color: #ffffff;
-  background-color: #EA5A49;
+  background-color: #ea5a49;
   margin: 10px 0;
   padding: 0 15px;
   border-radius: 2px;
   font-size: 16px;
   height: 40px;
   line-height: 40px;
-  width: 100%
+  width: 100%;
 }
-.btn:active{
-  background-color: #FA5A49
+.btn:active {
+  background-color: #fa5a49;
 }
 </style>

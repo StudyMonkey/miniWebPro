@@ -12,7 +12,7 @@
         "navigationBarTextStyle": "light"
     },
     "tabBar": {
-        "selectedColor": "EA5149",
+        "selectedColor": "#EA5A49",
         "list": [
             {
                 "pagePath": "pages/books/main",
